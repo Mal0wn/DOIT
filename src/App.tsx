@@ -21,6 +21,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 import HomeScreen from "./HomeScreen"
+import DisplayMission from './DisplayMission';
 
 
 
@@ -38,7 +39,7 @@ function App(): JSX.Element {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Home2" component={HomeScreen} />
+          <Stack.Screen name="DisplayMission" component={DisplayMission} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>

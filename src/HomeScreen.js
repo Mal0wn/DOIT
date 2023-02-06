@@ -18,14 +18,13 @@ function HomeScreen() {
 
     const navigation = useNavigation();
     const onDisplayMission = (id) => {
-      console.log("LALALALALA");
-      //navigation.navigate("DisplayMission", {id});
+      navigation.navigate("DisplayMission", {id});
       console.log(id)
     };
   
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    console.log(data);
+    //console.log(data);
   
     useEffect(() => {
       fetch("http://localhost:3000/mission")
