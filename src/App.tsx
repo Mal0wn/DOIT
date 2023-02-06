@@ -20,13 +20,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
+import HomeScreen from "./HomeScreen"
+
+
 
 const Stack = createNativeStackNavigator();
 
