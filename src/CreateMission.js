@@ -5,7 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import {
   View,
   TextInputField,
-  Button
+  TextInput,
+  Button,
+  StyleSheet
 } from 'react-native';
 
 function CreateMission({navigation}) {
@@ -14,28 +16,26 @@ function CreateMission({navigation}) {
     const [price , setPrice] = useState(0)
 
   return(
-    <View> 
-        {/* <TextInputField
-        iconName='person'
-        iconType='MaterialIcons'
-        placeholder='Enter title'
-        value={title}
+    <View style={{ flex: 1, padding: 24 }}> 
+      <TextInput
+        style={styles.input}
         onChangeText={text => setTitle(text)}
+        placeholder="Entrez un titre"
+        value={title}
       />
-       <TextInputField
-        iconName='person'
-        iconType='MaterialIcons'
-        placeholder='Enter description'
-        value={description}
+      <TextInput
+        style={styles.input}
         onChangeText={text => setDescription(text)}
+        placeholder="Entrez une description"
+        value={description}
       />
-      <TextInputField
-        iconName='person'
-        iconType='MaterialIcons'
-        placeholder='Enter price'
-        value={price}
+      <TextInput
+        style={styles.input}
         onChangeText={text => setPrice(text)}
-      /> */}
+        value={price}
+        placeholder="Entrez un prix"
+        keyboardType="numeric"
+      />
       <Button title='Submit' onPress={() => console.log("submit")}/>
     </View>
    );
@@ -43,6 +43,19 @@ function CreateMission({navigation}) {
   }
 
   export default CreateMission;
+
+  const styles = StyleSheet.create ( {
+
+    input : {
+      display: "flex",
+		  justifyContent: 'center',
+      borderColor : "#222823",
+      backgroundColor : "#CDB4DB" ,
+      margin : 4,
+      borderRadius : 5,
+      padding : 20
+    }
+  })
 
 
  
