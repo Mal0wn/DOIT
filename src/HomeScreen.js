@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-
 import {
   SafeAreaView,
   ScrollView,
@@ -11,12 +10,13 @@ import {
   useColorScheme,
   View,
   TouchableOpacity,
+  Image
 } from 'react-native';
 
 
-function HomeScreen() {
 
-    const navigation = useNavigation();
+function HomeScreen({navigation}) {
+    //const navigation = useNavigation();
     const onDisplayMission = (id) => {
       navigation.navigate("DisplayMission", {id});
       console.log(id)
@@ -33,7 +33,9 @@ function HomeScreen() {
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
     }, []);
-  
+
+    
+
     return (
       <View style={{ flex: 1, padding: 24 }}>
         {isLoading ? <Text>Loading...</Text> : 
@@ -44,13 +46,16 @@ function HomeScreen() {
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => onDisplayMission(item.id)}>
                   <View style={styles.box}>
-                    <Text size="H5" font="medium">
+                    <Text style={styles.containTitle}>
                       {item.title}
                     </Text>
+                    <View style={styles.containInfo}>
+                    
                     <Text size="Body">
                       {item.description}
                     </Text>
-                    <Text> {item.price}</Text>
+                    <Text> {item.price} €</Text>
+                    </View>
                   </View>
                 </TouchableOpacity>
               )}
@@ -76,28 +81,31 @@ function HomeScreen() {
 		flex: 1
 	},
 
-	itemContain : {
+	box : {
 		flex: 4,
 		backgroundColor: "#CDB4DB",
-		width: "70%",
-		margin : "auto",
+		width: "97%",
+		margin : "2%",
 		borderRadius : 5,
-		minHeight: "300px",
+		minHeight: 100,
 		height: "100%",
 		
 
 	},
 	containTitle : {
 		backgroundColor: "#5C9EAD",
-		borderTopLeftRadius : 5,
-		borderTopRightRadius : 5
+
+        borderRadius : 5,
+        padding: 10
 
 	},
 	title : {
 		color: "#222823",
-		padding : "0.6em",
+		padding : 20,
 		fontWeight: "bold",
-		textAlign: "center"
+		textAlign: "center",
+        borderRadius : 5,
+
 	},
 	imageDescContain : {
 		width : "90%",
@@ -114,7 +122,9 @@ function HomeScreen() {
 	containInfo : {
 		display : "flex",
 		flexDirection : 'row',
-		justifyContent: "space-between"
+		justifyContent: "space-between",
+        borderRadius : 5,
+        padding: 20
 	},
 
 

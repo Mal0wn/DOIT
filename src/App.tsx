@@ -17,15 +17,31 @@ import {
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 import HomeScreen from "./HomeScreen"
 import DisplayMission from './DisplayMission';
+import CreateMission from './CreateMission';
 
 
 
-const Stack = createNativeStackNavigator();
+const MissionStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+
+function MissionStackScreen() {
+  return (
+    <NavigationContainer independent={true}>
+      <MissionStack.Navigator>
+          <MissionStack.Screen name="Home" component={HomeScreen} />
+          <MissionStack.Screen name="DisplayMission" component={DisplayMission} />
+      </MissionStack.Navigator>
+    </NavigationContainer>
+      
+  )
+}
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -36,11 +52,11 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaView style={styles.main}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="DisplayMission" component={DisplayMission} />
-        </Stack.Navigator>
+      <NavigationContainer independent={true}>
+        <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Screen name="Home" component={MissionStackScreen} />
+        <Tab.Screen name="CreateMission" component={CreateMission} />
+      </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>
   );
