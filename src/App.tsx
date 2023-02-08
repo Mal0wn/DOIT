@@ -34,7 +34,7 @@ const Tab = createBottomTabNavigator();
 function MissionStackScreen() {
   return (
     <NavigationContainer independent={true}>
-      <MissionStack.Navigator>
+      <MissionStack.Navigator >
           <MissionStack.Screen name="Home" component={HomeScreen} />
           <MissionStack.Screen name="DisplayMission" component={DisplayMission} />
       </MissionStack.Navigator>
