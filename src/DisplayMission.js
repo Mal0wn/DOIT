@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import axios from "axios";
 
 
 import {
@@ -19,30 +20,40 @@ import {
 function DisplayMission({ route, navigation }) {
 
   const [data, setData] = useState([{ title: "", description: "", price: 0, id_create: 0 }]);
-  // id, picture , price , title , description , creation_date ,id_create,id_make, status
-  //const [dataUser, setUser] = useState([{ firstname: "", lastname:"" , id:0 }]);
+  const [dataUser, setUser] = useState([{ firstname: "", lastname:"" , id:0 }]);
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    fetch("http://localhost:3000/mission/" + id)
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.error(error))
-      .finally(() => console.log(data));
-
-  }, []);
   const { id } = route.params
-  console.log("Mission numero " + id)
-/*
+ 
+
+
+  const fetchMission = async (idMission) => {
+    await axios
+    .get("http://localhost:3000/mission/" + idMission)
+    .then((res) => {
+      setData(res.data)
+      console.log(res.data)
+      fetchUser(res.data[0].id_create)
+    })
+    .catch((err) => console.log(err));
+  }
+
+  const fetchUser = async (idCreate) => {
+    await axios
+    .get("http://localhost:3000/user/" + idCreate)
+    .then((res) => {
+      setUser(res.data)
+      console.log(res.data)
+      
+    })
+    .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
-    fetch("http://localhost:3000/user/" + data.id_create)
-      .then((response) => response.json())
-      .then((json) => setUser(json))
-      .catch((error) => console.error(error))
-      .finally(() => console.log("finallyUseEffectSetDataUser "+dataUser));
-
-  }, []);
-
- */
+    fetchMission(id)
+   
+    //fetchUser()
+  }, [])
 
   return (
     <View style={{ flex: 1, padding: 24 }}>
@@ -55,7 +66,7 @@ function DisplayMission({ route, navigation }) {
           <Text style={styles.description}>{data[0].description}</Text>
           <View>
             <Text>Prix :  {data[0].price} € </Text>
-            <Text>Proposée par :  {data[0].id_make} </Text>
+            <Text>Proposée par : {dataUser[0].firstname}  </Text>
           </View>
         </View>
         
@@ -67,8 +78,8 @@ function DisplayMission({ route, navigation }) {
       </View>
     </View>
 
-
   );
+  
 }
 
 export default DisplayMission;
