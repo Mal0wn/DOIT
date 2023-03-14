@@ -1,62 +1,25 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, {useState} from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {TokenContext} from './context/TokenContext';
+import {UserContext} from './context/UserContext';
+import {BottomTabNavigator} from './Navigators/BottomTabNavigator';
 
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
-
-import HomeScreen from "./HomeScreen"
-import DisplayMission from './DisplayMission';
-import CreateMission from './CreateMission';
-
-
-
-const MissionStack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
-
-function MissionStackScreen() {
-  return (
-    <NavigationContainer independent={true}>
-      <MissionStack.Navigator>
-          <MissionStack.Screen name="Home" component={HomeScreen} />
-          <MissionStack.Screen name="DisplayMission" component={DisplayMission} />
-      </MissionStack.Navigator>
-    </NavigationContainer>
-      
-  )
-}
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+function App() {
+  const [user, setUser] = useState();
+  const [token, setToken] = useState();
 
   return (
     <SafeAreaView style={styles.main}>
       <NavigationContainer independent={true}>
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Tab.Screen name="Home" component={MissionStackScreen} />
-        <Tab.Screen name="CreateMission" component={CreateMission} />
-      </Tab.Navigator>
+        {/* Context Provider to use Token on all the app */}
+        <TokenContext.Provider value={[token, setToken]}>
+          {/* Context Provider to use userInfos on all the app */}
+          <UserContext.Provider value={[user, setUser]}>
+            {/* Bottom Navigation */}
+            <BottomTabNavigator />
+          </UserContext.Provider>
+        </TokenContext.Provider>
       </NavigationContainer>
     </SafeAreaView>
   );
