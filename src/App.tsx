@@ -1,49 +1,25 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, {useState} from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {TokenContext} from './context/TokenContext';
+import {UserContext} from './context/UserContext';
+import {BottomTabNavigator} from './Navigators/BottomTabNavigator';
 
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
-
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+function App() {
+  const [user, setUser] = useState();
+  const [token, setToken] = useState();
 
   return (
     <SafeAreaView style={styles.main}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Home2" component={HomeScreen} />
-        </Stack.Navigator>
+      <NavigationContainer independent={true}>
+        {/* Context Provider to use Token on all the app */}
+        <TokenContext.Provider value={[token, setToken]}>
+          {/* Context Provider to use userInfos on all the app */}
+          <UserContext.Provider value={[user, setUser]}>
+            {/* Bottom Navigation */}
+            <BottomTabNavigator />
+          </UserContext.Provider>
+        </TokenContext.Provider>
       </NavigationContainer>
     </SafeAreaView>
   );
