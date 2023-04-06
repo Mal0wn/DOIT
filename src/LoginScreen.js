@@ -1,4 +1,5 @@
-import React, {useState, useContext} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useContext, useEffect} from 'react';
 import {
   C_Blue_Background,
   C_Blue_Button,
@@ -11,7 +12,6 @@ import Logo from './assets/LogoDoIt.png';
 import Key from './assets/key.png';
 import At from './assets/at.png';
 import jwt_decode from 'jwt-decode';
-
 import {
   StyleSheet,
   Text,
@@ -73,6 +73,15 @@ function LoginScreen() {
     navigation.navigate('CreateAccount');
   };
 
+  const onGoToForgotPassword = () => {
+    navigation.navigate('ForgotPasswordS1');
+  };
+
+  useEffect(() => {
+    setToken('');
+    setUser('');
+  }, []);
+
   return (
     <View style={styles.page}>
       <View>
@@ -99,6 +108,13 @@ function LoginScreen() {
       </View>
       <TouchableOpacity style={styles.buttonOnConnect} onPress={onConnect}>
         <Text style={styles.buttonOnConnectText}>Se Connecter</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.buttonOnBecomeDoItor}
+        onPress={onGoToForgotPassword}>
+        <Text style={styles.buttonOnBecomeDoItorText}>
+          J'ai oublié mon mot de passe
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.buttonOnBecomeDoItor}
@@ -148,8 +164,8 @@ const styles = StyleSheet.create({
     width: '90%',
     height: '5%',
     borderBottomColor: C_Purple_Underline,
-    borderBottomWidth: 3,
-    paddingBottom: 30,
+    borderBottomWidth: 0.5,
+    paddingBottom: 5,
     textAlign: 'center',
     color: C_Back_Write,
     display: 'flex',
