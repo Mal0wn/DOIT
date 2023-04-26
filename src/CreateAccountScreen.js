@@ -116,7 +116,6 @@ function CreateAccountScreen() {
 
   useEffect(() => {
     if (phoneNumber !== '' || phoneNumber !== undefined) {
-      console.log('kj');
       setIsGoodPhoneNumber(false);
       if (/^[0-9]*$/.test(phoneNumber)) {
         setIsGoodPhoneNumber(true);
@@ -153,9 +152,7 @@ function CreateAccountScreen() {
 
   useEffect(() => {
     if (email === '') {
-      // console.log('gn');
     } else {
-      // console.log('p');
       setIsGoodEmail(false);
       if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
         setIsGoodEmail(true);

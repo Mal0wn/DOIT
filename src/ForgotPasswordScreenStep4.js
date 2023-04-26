@@ -3,10 +3,11 @@ import React from 'react';
 import {C_Blue_Background, C_Purple_Underline, C_White} from './lib/colors';
 import {useNavigation} from '@react-navigation/native';
 import Check from './assets/check2.png';
-
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ForgotPasswordStepHeader from './component/ForgotPasswordStepHeader';
+
 function ForgotPasswordScreenStep4() {
+  // Variables
   const navigation = useNavigation();
 
   const onGoToLogin = () => {
@@ -14,6 +15,7 @@ function ForgotPasswordScreenStep4() {
   };
 
   return (
+    // Simple success screen wich has a button to return to login page
     <View style={styles.page}>
       <View style={styles.header}>
         <ForgotPasswordStepHeader location="ForgotPasswordS4" step={4} />
@@ -39,6 +41,7 @@ function ForgotPasswordScreenStep4() {
   );
 }
 
+// style
 const styles = StyleSheet.create({
   displayCenter: {
     display: 'flex',

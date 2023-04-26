@@ -1,3 +1,4 @@
+// Global Varibales for Colors
 export const C_Blue_Background = 'rgba(162, 210, 255, 0.55)';
 export const C_Blue_Button = '#5C9EAD';
 export const C_White = '#FFFFFF';

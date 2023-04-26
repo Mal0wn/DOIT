@@ -5,12 +5,17 @@ import {C_Purple_Underline, C_White} from '../lib/colors';
 import {useNavigation} from '@react-navigation/native';
 
 const ForgotPasswordStepHeader = ({step, location}) => {
+  // Variables
   const navigation = useNavigation();
+
+  // Navigate to Login Page
   const onGoBack = () => {
     navigation.navigate('Login');
   };
+
   return (
     <View>
+      {/* Return Button */}
       <View style={styles.back}>
         <TouchableOpacity
           style={
@@ -22,6 +27,7 @@ const ForgotPasswordStepHeader = ({step, location}) => {
           <Text style={styles.backButtonFont}>Annuler</Text>
         </TouchableOpacity>
       </View>
+      {/* Forgot Password Steps */}
       <View style={styles.container}>
         <View style={styles.line} />
         <View style={[styles.circle, step >= 1 && styles.active]}>
@@ -41,6 +47,7 @@ const ForgotPasswordStepHeader = ({step, location}) => {
   );
 };
 
+// style
 const styles = StyleSheet.create({
   none: {
     display: 'none',
@@ -103,6 +110,7 @@ const styles = StyleSheet.create({
   },
 });
 
+// propsType setup
 ForgotPasswordStepHeader.prototype = {
   step: PropTypes.number,
   location: PropTypes.string,

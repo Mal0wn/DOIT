@@ -1,4 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+
 import React, {useEffect, useState, useContext} from 'react';
 import {
   C_Back_Write,
@@ -21,37 +22,51 @@ import ForgotPasswordStepHeader from './component/ForgotPasswordStepHeader';
 import axios from 'axios';
 import {API_BASE_URL} from './lib/globalVariables';
 import {TokenContext} from './context/TokenContext';
+import {ForgotPasswordContext} from './context/ForgotPasswordContext';
+import {PhoneContext} from './context/PhoneContext';
 
 function ForgotPasswordScreenStep1() {
+  // Variables
   const navigation = useNavigation();
   const [telNumber, setTelNumber] = useState('');
   const [isTelNumberEmpty, setIsTelNumberEmpty] = useState(true);
   const [token, setToken] = useContext(TokenContext);
+  const [code, setCode] = useContext(ForgotPasswordContext);
+  const [phone, setPhone] = useContext(PhoneContext);
+  const [isErrorMesage, setIsErrorMessage] = useState(false);
+  const [messageError, setMessageError] = useState();
 
-  const onGoToStep2 = () => {
-    navigation.navigate('ForgotPasswordS2');
-  };
-
+  //  methode to send code by sms
   const onSendSMS = async () => {
+    // Build the params object
     let params = {phoneNumber: telNumber};
-    onGoToStep2();
-    // BACK !
-    // await axios
-    //   .get(API_BASE_URL + '/forgotPassword/', params, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   })
-    //   .then(response => {
-    //     console.log(response.data[0]);
-    //     onGoToStep2();
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+    // axios requet
+    await axios
+      .post(API_BASE_URL + '/login/forgotPassword/', params)
+      .then(response => {
+        if (response.data === -1) {
+          isErrorMesage(true);
+          setMessageError('Phone Empty');
+        } else if (response.data === -2) {
+          isErrorMesage(true);
+          setMessageError('No User Found');
+        } else {
+          isErrorMesage(false);
+          // set contexts values
+          setCode(response.data);
+          setPhone(telNumber);
+          // Navigate
+          navigation.navigate('ForgotPasswordS2');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
+  // on load page
   useEffect(() => {
+    // Manage error while telNumber is changing
     setIsTelNumberEmpty(true);
     if (
       !(telNumber === '' || telNumber === 'undefined' || telNumber === null)
@@ -74,6 +89,7 @@ function ForgotPasswordScreenStep1() {
           Cliquez sur le bouton pour envoyer un code de reinitialisation par
           SMS.
         </Text>
+        {/* Input to enter the phone number */}
         <View>
           <Text style={styles.text}>
             Entrez le numéro de téléphone lié au compte :
@@ -88,6 +104,7 @@ function ForgotPasswordScreenStep1() {
             }}
           />
         </View>
+        {messageError && <p>{messageError}</p>}
 
         <View style={styles.centralButton}>
           <TouchableOpacity
@@ -108,6 +125,7 @@ function ForgotPasswordScreenStep1() {
   );
 }
 
+// style
 const styles = StyleSheet.create({
   centralButton: {
     display: 'flex',

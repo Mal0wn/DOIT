@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   C_Blue_Background,
   C_Back_Write,
@@ -20,8 +19,12 @@ import {
 import Check from './assets/check2.png';
 import Cross from './assets/cross.png';
 import ForgotPasswordStepHeader from './component/ForgotPasswordStepHeader';
+import axios from 'axios';
+import {API_BASE_URL} from './lib/globalVariables';
+import {PhoneContext} from './context/PhoneContext';
 
 function ForgotPasswordScreenStep3() {
+  // Variables
   const navigation = useNavigation();
   const [password, setPassword] = useState();
   const [passwordVerif, setPasswordVerif] = useState();
@@ -30,16 +33,47 @@ function ForgotPasswordScreenStep3() {
   const [isMajGood, setIsMajGood] = useState();
   const [isMinGood, setIsMinGood] = useState();
   const [isNumberGood, setIsNumberGood] = useState();
+  const [phone, setPhone] = useContext(PhoneContext);
+  const [isErrorMesage, setIsErrorMessage] = useState(false);
+  const [messageError, setMessageError] = useState();
 
-  const onGoToStep4 = () => {
-    navigation.navigate('ForgotPasswordS4');
+  // Methode to reinit Password
+  const onReinitPassword = async () => {
+    // built object params
+    const params = {
+      phoneNumber: phone,
+      password: password,
+    };
+    // requetes Axios
+    await axios
+      .post(API_BASE_URL + '/login/resetPassword/', params)
+      .then(response => {
+        if (response.data === -1) {
+          setIsErrorMessage(true);
+          setMessageError('PhoneNumber Empty');
+        } else if (response.data === -1) {
+          setIsErrorMessage(true);
+          setMessageError('Password Empty');
+        } else if (response.data === -3) {
+          setIsErrorMessage(true);
+          setMessageError('User not found');
+        } else if (response.data === -4) {
+          setIsErrorMessage(true);
+          setMessageError('Error on update password');
+        } else if (response.data === -5) {
+          setIsErrorMessage(true);
+          setMessageError('Error on Hash Password');
+        } else {
+          navigation.navigate('ForgotPasswordS4');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
-  const onReinitPassword = () => {
-    // BACK !
-    onGoToStep4();
-  };
-
+  // on modify password
+  // check if regex and password are fill
   useEffect(() => {
     setIsLengthGood(false);
     setIsMinGood(false);
@@ -82,7 +116,9 @@ function ForgotPasswordScreenStep3() {
           <Text style={styles.textAlign}>
             Entrez votre nouveau mot de passe
           </Text>
+          {messageError && <p>{messageError}</p>}
           <View style={styles.displayColCenter}>
+            {/* password inputs */}
             <TextInput
               style={styles.inputText}
               maxLength={15}
@@ -99,7 +135,7 @@ function ForgotPasswordScreenStep3() {
               value={passwordVerif}
             />
           </View>
-
+          {/* see if regex are ok */}
           <View style={styles.regPass}>
             <Image style={styles.img} source={isLengthGood ? Check : Cross} />
             <Text>Entre 8 et 15 charactères</Text>
@@ -136,6 +172,7 @@ function ForgotPasswordScreenStep3() {
   );
 }
 
+// style
 const styles = StyleSheet.create({
   displayColCenter: {
     display: 'flex',
