@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {APIURL} from '@env'
 
 import {
   SafeAreaView,
@@ -25,9 +26,9 @@ function HomeScreen({navigation}) {
   //console.log(data);
 
   useEffect(() => {
-    fetch('http://localhost:3000/mission')
+    fetch('http://'+APIURL+':3000/mission/48')
       .then(response => response.json())
-      .then(json => setData(json))
+      .then(json => setData([json]))
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
   }, []);

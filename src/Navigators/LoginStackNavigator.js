@@ -3,6 +3,7 @@ import React from 'react';
 import CreateAccountScreen from '../CreateAccountScreen';
 import HomeScreen from '../HomeScreen';
 import LoginScreen from '../LoginScreen';
+import { BottomTabNavigator } from './BottomTabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,7 @@ export const LoginStackNavigator = () => {
       />
       <Stack.Screen
         name="Home"
-        component={HomeScreen}
+        component={BottomTabNavigator}
         options={{title: 'Accueil'}}
       />
     </Stack.Navigator>

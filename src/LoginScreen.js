@@ -27,8 +27,8 @@ import {UserContext} from './context/UserContext';
 
 function LoginScreen() {
   const navigation = useNavigation();
-  const [identifiant, setIdentifiant] = useState('');
-  const [password, setPassword] = useState('');
+  const [identifiant, setIdentifiant] = useState('alphonse@brown');
+  const [password, setPassword] = useState('totoleharicot');
   const [token, setToken] = useContext(TokenContext);
   const [user, setUser] = useContext(UserContext);
 
@@ -37,12 +37,14 @@ function LoginScreen() {
    * successful, it sets the token in the local storage and calls the onGetCurrentUser function
    */
   const onConnect = async () => {
-    let params = {email: identifiant, password: password};
+    /* let params = {email: identifiant, password: password}; */
+    let params = {email: "alphonse@brown.fr", password: "totoleharicot"};
     await axios
       .post(API_BASE_URL + '/login', params)
       .then(response => {
         setToken(response.data.token);
         onGetCurrentUser(response.data.token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localToken}`;
       })
       .catch(error => {
         console.log(error);
