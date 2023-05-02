@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
 import {TokenContext} from './context/TokenContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import dayjs from "dayjs";
 
 import {
   StyleSheet,
@@ -10,8 +11,10 @@ import {
   View,
   Pressable,
   TouchableOpacity,
+  Image
 } from 'react-native';
 import { API_BASE_URL } from './lib/globalVariables';
+
 
 function DisplayMission({ route, navigation }) {
 
@@ -19,6 +22,7 @@ function DisplayMission({ route, navigation }) {
   const [dataUser, setUser] = useState([{ firstname: "", lastname: "", id: 0 }]);
   const [token, setToken] = useContext(TokenContext);
   const { idMission } = route.params
+  const [picture, setPicture] = useState()
 
   console.log("DisplayMiss data: " + data)
   console.log("DisplayMiss token: " + token)
@@ -34,12 +38,18 @@ function DisplayMission({ route, navigation }) {
         },
       })
       .then((res) => {
-        
-        setData(res.data)
-        console.log("resdata0 : " + res.data)
+        if (res.data.picture == null) {
+          let link = "https://picsum.photos/id/76/4912/3264";
+          setPicture(link)
+        } else {
+          console.log("false" + res.data.picture)
+        }
+        let localDate = dayjs(res.data.creation_date).format("DD MMM YYYY");
+        let localData = res.data
+        console.log(localData)
+        localData.creation_date = localDate
+        setData(localData)
         fetchUser(res.data.id_create)
-        
-       console.log(res.data)
       })
       .catch((err) => console.log(err));
     }
@@ -67,19 +77,28 @@ function DisplayMission({ route, navigation }) {
   }, [])
 
   return (
-    <View style={{ flex: 1, padding: 24 }}>
-       <TouchableOpacity style={styles.iconContainer} onPress={()=>console.log('dhjksds')}>
-            <Icon style={styles.icon} name="reply"/> 
-            </TouchableOpacity>
-      <View style={styles.box}>
-        <View style={styles.containTitle}>
+    <View style={styles.container}>
+       <TouchableOpacity style={styles.iconContainer} onPress={()=>navigation.navigate("MissionList")}>
+            <Text style={styles.retour}> Retour </Text>
+            <View style={styles.containTitle}>
           <Text style={styles.title}> {data.title}</Text>
+        </View>
+            </TouchableOpacity>
+
+      <View style={styles.box}>
+       
+        <View style={styles.photoContain}>
+        <Image
+        style={styles.logo}
+        source={{uri: picture}}
+      />
         </View>
         <View style={styles.containDescription}>
           <Text style={styles.description}>{data.description}</Text>
           <View>
             <Text>Prix :  {data.price} € </Text>
             <Text>Proposée par : {dataUser.firstname} {dataUser.lastname}  </Text>
+            <Text>Date : {data.creation_date}</Text>
           </View>
         </View>
         <Pressable
@@ -98,34 +117,69 @@ export default DisplayMission;
 
 
 const styles = StyleSheet.create({
-
+  container: {
+    backgroundColor: "#FFFFFF",
+    display: "flex",
+    flex: 1,
+    height: "90%"
+  },
   box: {
-    backgroundColor: "#5C9EAD",
+    backgroundColor: "#FFFFFF",
     borderRadius: 5,
     display: "flex",
-    justifyContent: "center",
-    textAlign: "center"
+    flex:1,
+    textAlign: "center",
+    height : "100%"
 
   },
-  icon: {
+  retour: {
+    color: "#FFFFFF",
+    fontWeight: "bold",
+    marginTop : 10,
+    marginLeft : 5
 
+  },
+  iconContainer: {
+    backgroundColor: "#5C9EAD",
+    display: "flex",
+    justifyContent : "space-between"
+  },
+  photoContain : {
+    width : '100%',
+    height: 250,
+    display : "flex",
+    justifyContent: 'center',
+    margin: "auto",
+  },
+  logo : {
+    width : "90%",
+   height: "90%",
+    borderBottomEndRadius : 5,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    borderBottomStartRadius : 5,
+    marginTop : 15,
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   containTitle: {
-    backgroundColor: "#7D1D3F",
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     padding: 10
   },
   title: {
     color: "#FFFFFF",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize : 30,
+    textAlign : "center"
   },
   containDescription: {
-
+    
     padding: 10
   },
   description: {
-    textAlign: "justify"
+    textAlign: "justify",
+    fontWeight: "bold",
   },
   button: {
     backgroundColor: "#7D1D3F",
