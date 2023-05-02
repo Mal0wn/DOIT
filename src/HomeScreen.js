@@ -4,56 +4,54 @@ import {useNavigation} from '@react-navigation/native';
 import { API_BASE_URL } from './lib/globalVariables';
 import axios from 'axios';
 import {
-  SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   FlatList,
-  useColorScheme,
   View,
   TouchableOpacity,
-  Image,
 } from 'react-native';
 import {TokenContext} from './context/TokenContext';
+import { IdMissionContext } from './context/IdMissionContext';
+import { UserContext } from './context/UserContext';
+import DisplayMission from './DisplayMission';
 
 function HomeScreen() {
   const navigation = useNavigation();
-  const onDisplayMission = id => {
-    navigation.navigate('DisplayMission', {id});
-    console.log(id);
-  };
+
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [token, setToken] = useContext(TokenContext);
-  //console.log(data);
+  //const [idMission , setIdMission] = useContext(IdMissionContext)   Error 
+  const [user , setUser] = useContext(UserContext)
 
-  //const requrl = process.env.API_URL + "missions"
-  const reqURL = "http://localhost:3000/mission/search?long=3,203&lat=50,633&radius=10"
+  console.log("data: " + data)
+  console.log("token: " + token)
+
+  console.log("user: " + user )
+
 
 
   useEffect(() => {
-    if (token === undefined) {
+    if (token === undefined ) {
       navigation.navigate('Déconnexion');
     } else {
       console.log(token);
+      console.log(user)
      onFetchMission()
-
-
     }
   }, []);
 
   const onFetchMission = async() => {
-
     await axios
-    .get(API_BASE_URL + '/mission/search?long=100.000001&lat=100.000001&radius=10', {
+    .get(API_BASE_URL + '/mission', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
     .then(response => {
-      console.log(response.data) // il console log bien comme il faut 
-      setData(response.data) // la je set la data 
+      console.log(response.data) 
+      setData(response.data) 
       setLoading(false)
     })
     .catch(error => {
@@ -61,6 +59,9 @@ function HomeScreen() {
     });
     
   }
+
+
+
 
   return (
     <View style={{flex: 1, padding: 24}}>
@@ -70,11 +71,16 @@ function HomeScreen() {
         </View>
       ) : (
         <View>
-          <FlatList
+          { <FlatList
             data={data}
             keyExtractor={({id}, index) => id}
             renderItem={({item}) => (
-              <TouchableOpacity onPress={() => onDisplayMission(item.id)}>
+              <TouchableOpacity onPress={() =>
+                navigation.navigate(' ', {
+                  screen: 'DisplayMission',
+                  params: { id: item.id },
+                })
+              }>
                 <View style={styles.box}>
                   <Text style={styles.containTitle}>{item.title}</Text>
                   <View style={styles.containInfo}>
@@ -84,11 +90,12 @@ function HomeScreen() {
                 </View>
               </TouchableOpacity>
             )}
-          />
+          /> }
         </View>
       )}
     </View>
   );
+  
 }
 
 const styles = StyleSheet.create({

@@ -1,5 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
+import DisplayMission from '../DisplayMission';
 import HomeScreen from '../HomeScreen';
 import {LoginStackNavigator} from './LoginStackNavigator';
 
@@ -16,7 +17,16 @@ export const BottomTabNavigator = () => {
           tabBarStyle: {display: 'none'},
         }}
       />
-      {/* Add Some routes to the bottom navigator */}
+      <Tab.Screen name=" " component={DisplayMission} 
+      options={{
+          tabBarIconStyle: { display: "none" },
+          
+    
+        }}
+        />
+        
     </Tab.Navigator>
   );
 };
+
+
