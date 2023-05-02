@@ -6,93 +6,50 @@ import axios from 'axios';
 import {
   StyleSheet,
   Text,
-  FlatList,
   View,
   TouchableOpacity,
 } from 'react-native';
 import {TokenContext} from './context/TokenContext';
-import { IdMissionContext } from './context/IdMissionContext';
+
 import { UserContext } from './context/UserContext';
-import DisplayMission from './DisplayMission';
+
 
 function HomeScreen() {
   const navigation = useNavigation();
-
-
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
   const [token, setToken] = useContext(TokenContext);
-  //const [idMission , setIdMission] = useContext(IdMissionContext)   Error 
   const [user , setUser] = useContext(UserContext)
-
-  console.log("data: " + data)
-  console.log("token: " + token)
-
-  console.log("user: " + user )
-
-
+  
+  console.log(" HS token: " + token)
+  console.log("HS List user: " + user )
+  
 
   useEffect(() => {
     if (token === undefined ) {
       navigation.navigate('Déconnexion');
     } else {
-      console.log(token);
-      console.log(user)
-     onFetchMission()
+      console.log("UseEffect Else HS");
+      
+
     }
   }, []);
-
-  const onFetchMission = async() => {
-    await axios
-    .get(API_BASE_URL + '/mission', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then(response => {
-      console.log(response.data) 
-      setData(response.data) 
-      setLoading(false)
-    })
-    .catch(error => {
-      console.log(error);
-    });
-    
-  }
-
-
 
 
   return (
     <View style={{flex: 1, padding: 24}}>
-      {isLoading ? (
-        <View>
-          <Text>Loading...</Text>
-        </View>
-      ) : (
-        <View>
-          { <FlatList
-            data={data}
-            keyExtractor={({id}, index) => id}
-            renderItem={({item}) => (
-              <TouchableOpacity onPress={() =>
-                navigation.navigate(' ', {
-                  screen: 'DisplayMission',
-                  params: { id: item.id },
-                })
-              }>
-                <View style={styles.box}>
-                  <Text style={styles.containTitle}>{item.title}</Text>
-                  <View style={styles.containInfo}>
-                    <Text size="Body">{item.description}</Text>
-                    <Text> {item.price} €</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            )}
-          /> }
-        </View>
-      )}
+      <Text> DO IT 4 ME </Text>
+      <TouchableOpacity onPress={() => navigation.navigate("MissionList")}> 
+                  <Text>Liste des Missions</Text> 
+      </TouchableOpacity>
+      <TouchableOpacity >
+        <Text> Profil </Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text> BLABLA</Text> 
+      </TouchableOpacity>
+
+
+
+
     </View>
   );
   
