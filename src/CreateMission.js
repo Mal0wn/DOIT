@@ -29,6 +29,7 @@ function CreateMission({ navigation }) {
   const creation_date = convertLocalTimeToISOString()
 // RECUP USER 
 
+
   const postMission = async () => {
     let data = {
       picture: "https://picsum.photos/200",
