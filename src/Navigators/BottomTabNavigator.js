@@ -7,8 +7,12 @@ const Tab = createBottomTabNavigator();
 
 export const BottomTabNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator
+      initialRouteName="Accueil"
+      screenOptions={{headerShown: false}}>
+      {/* Navigator to Accueil */}
       <Tab.Screen name="Accueil" component={HomeScreen} />
+      {/* Navigator to Login Page */}
       <Tab.Screen
         name="Déconnexion"
         component={LoginStackNavigator}
