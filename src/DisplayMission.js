@@ -2,8 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
 import {TokenContext} from './context/TokenContext';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from "dayjs";
+
+Ionicons.loadFont().then();
+
 
 import {
   StyleSheet,
@@ -79,7 +82,8 @@ function DisplayMission({ route, navigation }) {
   return (
     <View style={styles.container}>
        <TouchableOpacity style={styles.iconContainer} onPress={()=>navigation.navigate("MissionList")}>
-            <Text style={styles.retour}> Retour </Text>
+            <Text style={styles.retour}> <Ionicons name={"arrow-back-circle-outline"} size={24} color={'#7D1D3F'} /></Text>
+            
             <View style={styles.containTitle}>
           <Text style={styles.title}> {data.title}</Text>
         </View>

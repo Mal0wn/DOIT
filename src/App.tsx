@@ -31,6 +31,7 @@ function App() {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+    backgroundColor : "#CDB4DB"
   },
   sectionContainer: {
     marginTop: 32,

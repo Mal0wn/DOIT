@@ -10,7 +10,7 @@ export const MissionStackNavigator = () => {
     <Stack.Navigator initialRouteName="MissionList" screenOptions={{headerShown: false}} >
       <Stack.Screen name="DisplayMission" component={DisplayMission} />
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="MissionList" component={MissionList} />
+      <Stack.Screen name="MissionList" component={MissionList}  />
     </Stack.Navigator>
   );
 }

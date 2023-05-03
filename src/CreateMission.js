@@ -27,7 +27,7 @@ function CreateMission({ navigation }) {
   const [id_create] = useState(4)
   const [token, setToken] = useContext(TokenContext);
   const creation_date = convertLocalTimeToISOString()
-
+// RECUP USER 
 
   const postMission = async () => {
     let data = {
