@@ -45,7 +45,8 @@ function DisplayMission({ route, navigation }) {
           let link = "https://picsum.photos/id/76/4912/3264";
           setPicture(link)
         } else {
-          console.log("false" + res.data.picture)
+          setPicture(res.data.picture)
+          
         }
         let localDate = dayjs(res.data.creation_date).format("DD MMM YYYY");
         let localData = res.data
