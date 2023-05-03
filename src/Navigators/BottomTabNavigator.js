@@ -4,6 +4,7 @@ import DisplayMission from '../DisplayMission';
 import HomeScreen from '../HomeScreen';
 import {LoginStackNavigator} from './LoginStackNavigator';
 import { MissionStackNavigator, MyStack } from './MissionStackNavigator';
+import CreateMission from '../CreateMission';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,11 @@ export const BottomTabNavigator = () => {
         name="MissionList"
         component={MissionStackNavigator}
         
-      />
+  />
+  <Tab.Screen
+        name="Add Mission"
+        component={CreateMission} 
+  />
     <Tab.Screen
         name="Déconnexion"
         component={LoginStackNavigator}
