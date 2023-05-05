@@ -61,7 +61,10 @@ function LoginScreen() {
         },
       })
       .then(response => {
-        setUser(response.data[0]);
+        let user = response.data[0]
+        setUser(user);
+        console.log(response.data)
+        navigation.navigate('Home')
       })
       .then(navigation.navigate('Home'))
       .catch(error => {

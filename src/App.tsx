@@ -5,6 +5,8 @@ import {TokenContext} from './context/TokenContext';
 import {UserContext} from './context/UserContext';
 import {BottomTabNavigator} from './Navigators/BottomTabNavigator';
 
+import 'react-native-gesture-handler';
+
 function App() {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
@@ -17,6 +19,7 @@ function App() {
           {/* Context Provider to use userInfos on all the app */}
           <UserContext.Provider value={[user, setUser]}>
             {/* Bottom Navigation */}
+
             <BottomTabNavigator />
           </UserContext.Provider>
         </TokenContext.Provider>
@@ -28,6 +31,7 @@ function App() {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+    backgroundColor : "#CDB4DB"
   },
   sectionContainer: {
     marginTop: 32,
