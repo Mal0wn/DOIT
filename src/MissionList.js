@@ -1,6 +1,6 @@
   import React, {useEffect, useState, useContext} from 'react';
   import {useNavigation} from '@react-navigation/native';
-  import { API_BASE_URL } from './lib/globalVariables';
+ 
 
   import axios from 'axios';
   import {
@@ -13,6 +13,8 @@
   import {TokenContext} from './context/TokenContext';
   import { UserContext } from './context/UserContext';
   import Ionicons from 'react-native-vector-icons/Ionicons';
+  import missionService from './service/mission.service';
+
   Ionicons.loadFont().then();
   
   function MissionList() {
@@ -40,7 +42,27 @@
 
   
     const onFetchMission = async() => {
-      await axios
+      console.log("ONFETCHMISSION BEFORE AWAIT")
+      
+        
+        await missionService.fetchMissionWithUser(token)
+      
+      
+      .then(response => {
+        setData(response)
+        setLoading(false)
+      })
+      
+      .catch(error => {
+        console.log("ERROR ONFETCH")
+        console.log(error)
+      })
+      
+      
+      
+     
+     
+     /* await axios
       .get(API_BASE_URL + '/mission', {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -54,6 +76,7 @@
       .catch(error => {
         console.log(error);
       });
+      */
     }
   
 

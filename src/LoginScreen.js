@@ -37,7 +37,8 @@ function LoginScreen() {
    * successful, it sets the token in the local storage and calls the onGetCurrentUser function
    */
   const onConnect = async () => {
-    let params = {email: identifiant, password: password};
+    //let params = {email: identifiant, password: password};
+    let params = {email: "alphonse@brown.fr", password: "totoleharicot"};
     await axios
       .post(API_BASE_URL + '/login', params)
       .then(response => {

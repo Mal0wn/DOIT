@@ -1,9 +1,13 @@
+import React, {useEffect, useState, useContext} from 'react';
 import axios from "axios";
+import { TokenContext } from "../context/TokenContext";
 
-export class missionService{
-    url = `${process.env.API_URL}/mission`;
 
-    async search(lat, long, radius){
+const [token, setToken] = useContext(TokenContext);
+ const missionService = {
+    
+    
+    search: async (lat, long, radius) => {
         let loadedurl = `${this.url}/search?lat=${lat}&long=${long}&radius=${radius}`;
         await axios
         .get(this.url,{
@@ -15,9 +19,9 @@ export class missionService{
         .catch(function (error) {
             console.log("error post");
         })
-    }
+    },
 
-    async create(mission) {
+    create: async (mission) => {
         let loadedurl = `${this.url}`
         await axios 
         .post(this.url,{
@@ -29,5 +33,31 @@ export class missionService{
         .catch(function(error) {
             console.log("error post mission")
         })
+    },
+
+    fetchMissionWithUser:async (token) => {
+        
+        let dataMissUse = []
+        console.log("AFTERDA")
+        console.log("token : " + token)
+        await axios
+      .get('http://localhost:3000/mission', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        console.log(response.data) 
+        dataMissUse = response.data
+      })
+      .catch(error => {
+        console.log("FetchSERVICE")
+        console.log(error);
+      });
+    
+      return dataMissUse;
     }
 }
+
+
+export default missionService;
