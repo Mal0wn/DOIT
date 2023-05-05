@@ -42,41 +42,14 @@
 
   
     const onFetchMission = async() => {
-      console.log("ONFETCHMISSION BEFORE AWAIT")
-      
-        
         await missionService.fetchMissionWithUser(token)
-      
-      
       .then(response => {
         setData(response)
         setLoading(false)
       })
-      
       .catch(error => {
-        console.log("ERROR ONFETCH")
         console.log(error)
       })
-      
-      
-      
-     
-     
-     /* await axios
-      .get(API_BASE_URL + '/mission', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(response => {
-        console.log(response.data) 
-        setData(response.data) 
-        setLoading(false)
-      })
-      .catch(error => {
-        console.log(error);
-      });
-      */
     }
   
 

@@ -51,7 +51,6 @@ const [token, setToken] = useContext(TokenContext);
         dataMissUse = response.data
       })
       .catch(error => {
-        console.log("FetchSERVICE")
         console.log(error);
       });
     
