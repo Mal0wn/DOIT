@@ -39,15 +39,7 @@ function CreateMission({ navigation }) {
       title: title,
       description: description,
       price: price,
-      address : {
-        number : 109,
-        street : "Rue des Templiers",
-        city : "Lille",
-        zipcode : "59000",
-        country : "France", 
-        latitude : 50.634311371464875 ,
-        longitude : 3.0213492161170747
-      }
+      
     }
     const formData = new FormData();
     formData.append(JSON.stringify(data));
