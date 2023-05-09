@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {TokenContext} from './context/TokenContext';
+import {TokenContext} from '../../context/TokenContext';
 import axios from 'axios';
 
 import {
@@ -10,7 +10,7 @@ import {
   Text,
 
 } from 'react-native';
-import { API_BASE_URL } from './lib/globalVariables';
+import { API_BASE_URL } from '../../lib/globalVariables';
 
 function CreateMission({ navigation }) {
 
