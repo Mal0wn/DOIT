@@ -10,10 +10,10 @@
     View,
     TouchableOpacity,
   } from 'react-native';
-  import {TokenContext} from './context/TokenContext';
-  import { UserContext } from './context/UserContext';
+  import {TokenContext} from '../../context/TokenContext';
+  import { UserContext } from '../../context/UserContext';
   import Ionicons from 'react-native-vector-icons/Ionicons';
-  import missionService from './service/mission.service';
+  import missionService from '../../service/mission.service';
 
   Ionicons.loadFont().then();
   

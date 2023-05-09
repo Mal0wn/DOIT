@@ -5,7 +5,7 @@ import {
   C_Back_Write,
   C_White,
   C_Blue_Button,
-} from './lib/colors';
+} from '../../lib/colors';
 import {useNavigation} from '@react-navigation/native';
 
 import {

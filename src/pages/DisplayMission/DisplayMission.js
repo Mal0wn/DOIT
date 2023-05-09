@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
-import {TokenContext} from './context/TokenContext';
+import {TokenContext} from '../../context/TokenContext';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from "dayjs";
 
@@ -16,7 +16,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import { API_BASE_URL } from './lib/globalVariables';
+import { API_BASE_URL } from '../../lib/globalVariables';
 
 
 function DisplayMission({ route, navigation }) {
@@ -111,6 +111,7 @@ function DisplayMission({ route, navigation }) {
           onPress={() => console.log('Contacter')}>
           <Text style={styles.textButton}>Contacter</Text>
         </Pressable>
+        
       </View>
     </View>
 

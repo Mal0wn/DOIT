@@ -1,10 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import DisplayMission from '../DisplayMission';
-import HomeScreen from '../HomeScreen';
+import DisplayMission from '../pages/DisplayMission/DisplayMission';
+import HomeScreen from '../pages/HomeScreen/HomeScreen';
 import {LoginStackNavigator} from './LoginStackNavigator';
 import { MissionStackNavigator, MyStack } from './MissionStackNavigator';
-import CreateMission from '../CreateMission';
+import CreateMission from '../pages/CreateMission/CreateMission';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 Ionicons.loadFont().then();
 

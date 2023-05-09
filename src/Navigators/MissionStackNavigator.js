@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import DisplayMission from '../DisplayMission';
-import HomeScreen from '../HomeScreen';
-import MissionList from '../MissionList'
+import DisplayMission from '../pages/DisplayMission/DisplayMission';
+import HomeScreen from '../pages/HomeScreen/HomeScreen';
+import MissionList from '../pages/MissionList/MissionList'
 
 const Stack = createStackNavigator();
 

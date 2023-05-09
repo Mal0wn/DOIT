@@ -1,11 +1,12 @@
   /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState, useContext} from 'react';
-import Logo from './assets/LogoDoIt.png';
-import CheckAnnonce from './assets/checkAnnonce.png';
-import CheckMsg from './assets/messageImg.png';
-import PostAnn from './assets/postAnnonce.png';
+//import Logo from './../../assets/LogoDoIt.png';
+import Logo from '../../assets/LogoDoIt.png'
+import CheckAnnonce from './../../assets/checkAnnonce.png';
+import CheckMsg from './../../assets/messageImg.png';
+import PostAnn from './../../assets/postAnnonce.png';
 import {useNavigation} from '@react-navigation/native';
-import { API_BASE_URL } from './lib/globalVariables';
+import { API_BASE_URL } from '../../lib/globalVariables';
 import axios from 'axios';
 import {
   StyleSheet,
@@ -14,9 +15,9 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import {TokenContext} from './context/TokenContext';
+import {TokenContext} from '../../context/TokenContext';
 
-import { UserContext } from './context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
 
 function HomeScreen() {
