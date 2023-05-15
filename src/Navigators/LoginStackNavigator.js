@@ -4,6 +4,7 @@ import CreateAccountScreen from '../pages/CreateAccountScreen/CreateAccountScree
 import HomeScreen from '../pages/HomeScreen/HomeScreen';
 import LoginScreen from '../pages/LoginScreen/LoginScreen';
 import { BottomTabNavigator } from './BottomTabNavigator';
+import AccountScreen from '../pages/AccountScreen/AccountScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,8 +29,8 @@ export const LoginStackNavigator = () => {
         options={{title: 'Accueil'}}
       />
       <Stack.Screen
-        name="Account"
-        component={AcountScreen}
+        name="AccountScreen"
+        component={AccountScreen}
         options={{title: 'Mon compte'}}
       />
 
