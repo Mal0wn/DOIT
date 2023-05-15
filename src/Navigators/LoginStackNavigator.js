@@ -3,6 +3,7 @@ import React from 'react';
 import CreateAccountScreen from '../CreateAccountScreen';
 import HomeScreen from '../HomeScreen';
 import LoginScreen from '../LoginScreen';
+import AcountScreen from '../AccountScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,11 @@ export const LoginStackNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{title: 'Accueil'}}
+      />
+      <Stack.Screen
+        name="Account"
+        component={AcountScreen}
+        options={{title: 'Mon compte'}}
       />
     </Stack.Navigator>
   );
