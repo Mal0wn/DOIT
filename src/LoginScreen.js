@@ -39,7 +39,7 @@ function LoginScreen() {
   const onConnect = async () => {
     let params = {email: identifiant, password: password};
     await axios
-      .post(API_BASE_URL + '/login', params)
+      .post(API_BASE_URL + '/login/', params)
       .then(response => {
         setToken(response.data.token);
         onGetCurrentUser(response.data.token);
@@ -48,12 +48,14 @@ function LoginScreen() {
         console.log(error);
       });
   };
+
   /**
    * It takes a token as an argument, decodes it, and then uses the decoded token to make a GET request
    * to the backend to get the user's information
    */
   const onGetCurrentUser = async localToken => {
     let decodeToken = jwt_decode(localToken);
+    console.log(decodeToken.id);
     await axios
       .get(API_BASE_URL + '/user/' + decodeToken.id, {
         headers: {
@@ -61,10 +63,14 @@ function LoginScreen() {
         },
       })
       .then(response => {
-        setUser(response.data[0]);
+        console.log('je suis dans then');
+        setUser(response.data);
+        console.log(user);
+        navigation.navigate('Account');
       })
       .then(navigation.navigate('Home'))
       .catch(error => {
+        console.log('je suis dans catch');
         console.log(error);
       });
   };
@@ -146,7 +152,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '90%',
-    height: '5%',
+    height: '20%',
     borderBottomColor: C_Purple_Underline,
     borderBottomWidth: 3,
     paddingBottom: 30,
