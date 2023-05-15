@@ -1,9 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import CreateAccountScreen from '../CreateAccountScreen';
-import HomeScreen from '../HomeScreen';
-import LoginScreen from '../LoginScreen';
-import AcountScreen from '../AccountScreen';
+import CreateAccountScreen from '../pages/CreateAccountScreen/CreateAccountScreen';
+import HomeScreen from '../pages/HomeScreen/HomeScreen';
+import LoginScreen from '../pages/LoginScreen/LoginScreen';
+import { BottomTabNavigator } from './BottomTabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +24,7 @@ export const LoginStackNavigator = () => {
       />
       <Stack.Screen
         name="Home"
-        component={HomeScreen}
+        component={BottomTabNavigator}
         options={{title: 'Accueil'}}
       />
       <Stack.Screen
@@ -32,6 +32,7 @@ export const LoginStackNavigator = () => {
         component={AcountScreen}
         options={{title: 'Mon compte'}}
       />
+
     </Stack.Navigator>
   );
 };
