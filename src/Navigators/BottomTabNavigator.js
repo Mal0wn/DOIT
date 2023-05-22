@@ -49,6 +49,7 @@ export const BottomTabNavigator = () => {
 
     initialRouteName="Accueil">
       <Tab.Screen name="Accueil" component={HomeScreen} />
+      {/* Navigator to Login Page */}
       <Tab.Screen
             name="MissionList"
             component={MissionStackNavigator}
