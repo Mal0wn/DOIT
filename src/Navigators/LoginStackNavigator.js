@@ -1,12 +1,13 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import CreateAccountScreen from '../CreateAccountScreen';
 import ForgotPasswordScreenStep1 from '../ForgotPasswordScreenStep1';
 import ForgotPasswordScreenStep2 from '../ForgotPasswordScreenStep2';
 import ForgotPasswordScreenStep3 from '../ForgotPasswordScreenStep3';
 import ForgotPasswordScreenStep4 from '../ForgotPasswordScreenStep4';
-import LoginScreen from '../LoginScreen';
-import {BottomTabNavigator} from './BottomTabNavigator';
+import CreateAccountScreen from '../pages/CreateAccountScreen/CreateAccountScreen';
+import LoginScreen from '../pages/LoginScreen/LoginScreen';
+import { BottomTabNavigator } from './BottomTabNavigator';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +58,7 @@ export const LoginStackNavigator = () => {
         component={BottomTabNavigator}
         options={{title: 'Accueil'}}
       />
+
     </Stack.Navigator>
   );
 };

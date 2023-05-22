@@ -7,7 +7,7 @@ import {
   C_White,
   C_Green,
   C_Grey,
-} from './lib/colors';
+} from '../../lib/colors';
 import {useNavigation} from '@react-navigation/native';
 
 import {

@@ -6,11 +6,11 @@ import {
   C_White,
   C_Purple_Underline,
   C_Back_Write,
-} from './lib/colors';
+} from '../../lib/colors';
 import {useNavigation} from '@react-navigation/native';
-import Logo from './assets/LogoDoIt.png';
-import Key from './assets/key.png';
-import At from './assets/at.png';
+import Logo from './../../assets/LogoDoIt.png';
+import Key from './../../assets/key.png';
+import At from './../../assets/at.png';
 import jwt_decode from 'jwt-decode';
 import {
   StyleSheet,
@@ -21,9 +21,9 @@ import {
   Image,
 } from 'react-native';
 import axios from 'axios';
-import {API_BASE_URL} from './lib/globalVariables';
-import {TokenContext} from './context/TokenContext';
-import {UserContext} from './context/UserContext';
+import {API_BASE_URL} from '../../lib/globalVariables';
+import {TokenContext} from '../../context/TokenContext';
+import {UserContext} from '../../context/UserContext';
 
 function LoginScreen() {
   // Variables
@@ -43,6 +43,7 @@ function LoginScreen() {
     // form params to send
     let params = {email: identifiant, password: password};
     //axios requete to login
+
     await axios
       .post(API_BASE_URL + '/login', params)
       .then(response => {
@@ -84,7 +85,10 @@ function LoginScreen() {
         },
       })
       .then(response => {
-        setUser(response.data[0]);
+        let user = response.data[0]
+        setUser(user);
+        console.log(response.data)
+        navigation.navigate('Home')
       })
       .then(navigation.navigate('Home'))
       .catch(error => {

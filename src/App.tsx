@@ -7,6 +7,8 @@ import {BottomTabNavigator} from './Navigators/BottomTabNavigator';
 import {ForgotPasswordContext} from './context/ForgotPasswordContext';
 import {PhoneContext} from './context/PhoneContext';
 
+import 'react-native-gesture-handler';
+
 function App() {
   // Variables Contexts
   const [user, setUser] = useState();
@@ -21,6 +23,7 @@ function App() {
         <TokenContext.Provider value={[token, setToken]}>
           {/* Context Provider to use userInfos on all the app */}
           <UserContext.Provider value={[user, setUser]}>
+<<<<<<< HEAD
             {/* Context Provider to use the Code to forgot pasword on all the app */}
             <ForgotPasswordContext.Provider value={[code, setCode]}>
               {/* Context Provider to use the phoneNumber entred to forgotPassword on all the app */}
@@ -29,6 +32,11 @@ function App() {
                 <BottomTabNavigator />
               </PhoneContext.Provider>
             </ForgotPasswordContext.Provider>
+=======
+            {/* Bottom Navigation */}
+
+            <BottomTabNavigator />
+>>>>>>> develop
           </UserContext.Provider>
         </TokenContext.Provider>
       </NavigationContainer>
@@ -40,6 +48,7 @@ function App() {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+    backgroundColor : "#CDB4DB"
   },
   sectionContainer: {
     marginTop: 32,
