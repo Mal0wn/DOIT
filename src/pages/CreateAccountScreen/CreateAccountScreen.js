@@ -25,8 +25,9 @@ import {
   // Image,
 } from 'react-native';
 
-import Check from './assets/check2.png';
-import Cross from './assets/cross.png';
+import Check from '../../assets/check2.png';
+import Cross from '../../assets/cross.png';
+
 
 function CreateAccountScreen() {
   const navigation = useNavigation();

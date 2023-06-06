@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {TokenContext} from '../../context/TokenContext';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+
 
 import {
   View,
@@ -11,6 +13,7 @@ import {
 
 } from 'react-native';
 import { API_BASE_URL } from '../../lib/globalVariables';
+import { UserContext } from '../../context/UserContext';
 
 function CreateMission({ navigation }) {
 
@@ -24,10 +27,35 @@ function CreateMission({ navigation }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
-  const [id_create] = useState(4)
+ const [user, setUser]= useContext(UserContext);
   const [token, setToken] = useContext(TokenContext);
   const creation_date = convertLocalTimeToISOString()
 // RECUP USER 
+const onGetCurrentUser = async token => {
+  // get token
+  let decodeToken = jwt_decode(token);
+  // axios request
+  await axios
+    .get(API_BASE_URL + '/user/' + decodeToken.id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(response => {
+      let user = response.data
+      setUser(user);
+      console.log(response.data)
+      console.log("USER ON GET CURRENT USER")
+      console.log(user)
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+useEffect(()=> {
+onGetCurrentUser(token)
+},[])
 
 
   const postMission = async () => {
@@ -35,7 +63,7 @@ function CreateMission({ navigation }) {
       picture: "https://picsum.photos/200",
       status: "notMake",
       creation_date: creation_date,
-      id_create: id_create,
+      id_create: user.id,
       title: title,
       description: description,
       price: price,
